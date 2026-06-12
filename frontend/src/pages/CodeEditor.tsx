@@ -127,7 +127,7 @@ const CodeEditor: React.FC = () => {
           <div className="p-8 space-y-8">
             <div>
               <h2 className="text-2xl font-bold text-white mb-4">Description</h2>
-              <div className="text-dark-muted whitespace-pre-wrap leading-relaxed">
+              <div className="text-gray-300 whitespace-pre-wrap leading-relaxed text-sm lg:text-base">
                 {PROBLEM_DATA.description}
               </div>
             </div>
@@ -135,11 +135,11 @@ const CodeEditor: React.FC = () => {
             <div className="space-y-4">
               <h3 className="text-lg font-bold text-white">Examples</h3>
               {PROBLEM_DATA.examples.map((ex, i) => (
-                <div key={i} className="bg-dark-surface/50 border border-white/5 rounded-xl p-4 space-y-2">
+                <div key={i} className="glass-card border border-white/5 rounded-xl p-5 space-y-2 shadow-inner">
                   <p className="font-mono text-sm text-brand-accent"><span className="text-dark-muted select-none">Input:</span> {ex.input}</p>
                   <p className="font-mono text-sm text-semantic-success"><span className="text-dark-muted select-none">Output:</span> {ex.output}</p>
                   {ex.explanation && (
-                    <p className="text-sm text-dark-muted"><span className="font-semibold text-white select-none">Explanation:</span> {ex.explanation}</p>
+                    <p className="text-sm text-gray-300"><span className="font-semibold text-white select-none">Explanation:</span> {ex.explanation}</p>
                   )}
                 </div>
               ))}
