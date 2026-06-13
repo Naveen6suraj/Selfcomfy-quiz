@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getUserProfile = exports.loginUser = exports.registerUser = void 0;
+exports.getPublicProfile = exports.updateProgress = exports.getUserProfile = exports.loginUser = exports.registerUser = void 0;
 const User_1 = __importDefault(require("../models/User"));
 const generateToken_1 = require("../utils/generateToken");
 // @desc    Register a new user
@@ -31,6 +31,12 @@ const registerUser = async (req, res) => {
                 name: user.name,
                 email: user.email,
                 role: user.role,
+                branch: user.branch,
+                xp: user.xp,
+                streak: user.streak,
+                quizzesTaken: user.quizzesTaken,
+                accuracy: user.accuracy,
+                badges: user.badges,
                 token: (0, generateToken_1.generateToken)(user.id, user.role),
             });
         }
@@ -56,6 +62,12 @@ const loginUser = async (req, res) => {
                 name: user.name,
                 email: user.email,
                 role: user.role,
+                branch: user.branch,
+                xp: user.xp,
+                streak: user.streak,
+                quizzesTaken: user.quizzesTaken,
+                accuracy: user.accuracy,
+                badges: user.badges,
                 token: (0, generateToken_1.generateToken)(user.id, user.role),
             });
         }
@@ -87,3 +99,65 @@ const getUserProfile = async (req, res) => {
     }
 };
 exports.getUserProfile = getUserProfile;
+// @desc    Update user progress after a quiz
+// @route   PUT /api/auth/progress
+// @access  Private
+const updateProgress = async (req, res) => {
+    try {
+        const { xpEarned, scorePercentage } = req.body;
+        const user = await User_1.default.findById(req.user._id);
+        if (user) {
+            user.xp += xpEarned || 0;
+            user.quizzesTaken += 1;
+            // Basic moving average for accuracy
+            if (user.quizzesTaken === 1) {
+                user.accuracy = scorePercentage;
+            }
+            else {
+                user.accuracy = Math.round(((user.accuracy * (user.quizzesTaken - 1)) + scorePercentage) / user.quizzesTaken);
+            }
+            // Simple streak logic: if they take a quiz, ensure streak is at least 1
+            if (user.streak === 0)
+                user.streak = 1;
+            await user.save();
+            res.json({
+                _id: user.id,
+                name: user.name,
+                email: user.email,
+                role: user.role,
+                branch: user.branch,
+                xp: user.xp,
+                streak: user.streak,
+                quizzesTaken: user.quizzesTaken,
+                accuracy: user.accuracy,
+                badges: user.badges,
+                token: req.headers.authorization?.split(' ')[1] // return existing token
+            });
+        }
+        else {
+            res.status(404).json({ message: 'User not found' });
+        }
+    }
+    catch (error) {
+        res.status(500).json({ message: 'Server Error' });
+    }
+};
+exports.updateProgress = updateProgress;
+// @desc    Get public profile for sharing
+// @route   GET /api/auth/public/:id
+// @access  Public
+const getPublicProfile = async (req, res) => {
+    try {
+        const user = await User_1.default.findById(req.params.id).select('name role branch xp streak quizzesTaken accuracy badges');
+        if (user) {
+            res.json(user);
+        }
+        else {
+            res.status(404).json({ message: 'User not found' });
+        }
+    }
+    catch (error) {
+        res.status(500).json({ message: 'Server Error' });
+    }
+};
+exports.getPublicProfile = getPublicProfile;

@@ -10,4 +10,6 @@ const router = express_1.default.Router();
 router.post('/register', authController_1.registerUser);
 router.post('/login', authController_1.loginUser);
 router.get('/profile', authMiddleware_1.protect, authController_1.getUserProfile);
+router.put('/progress', authMiddleware_1.protect, authController_1.updateProgress);
+router.get('/public/:id', authController_1.getPublicProfile);
 exports.default = router;

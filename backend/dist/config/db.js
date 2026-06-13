@@ -5,10 +5,18 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose_1 = __importDefault(require("mongoose"));
 const dotenv_1 = __importDefault(require("dotenv"));
+const mongodb_memory_server_1 = require("mongodb-memory-server");
 dotenv_1.default.config();
 const connectDB = async () => {
     try {
-        const conn = await mongoose_1.default.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/antigravity');
+        let mongoUri = process.env.MONGODB_URI;
+        if (!mongoUri) {
+            console.log('No MONGODB_URI found, falling back to MongoMemoryServer...');
+            // Start In-Memory MongoDB Server so it works without installing MongoDB!
+            const mongoServer = await mongodb_memory_server_1.MongoMemoryServer.create();
+            mongoUri = mongoServer.getUri();
+        }
+        const conn = await mongoose_1.default.connect(mongoUri);
         console.log(`MongoDB Connected: ${conn.connection.host}`);
     }
     catch (error) {

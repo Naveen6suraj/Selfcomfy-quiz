@@ -46,6 +46,9 @@ const UserSchema = new mongoose_1.Schema({
     branch: { type: String },
     semester: { type: Number },
     xp: { type: Number, default: 0 },
+    streak: { type: Number, default: 0 },
+    quizzesTaken: { type: Number, default: 0 },
+    accuracy: { type: Number, default: 0 },
     badges: [{ type: String }],
 }, { timestamps: true });
 // Hash password before saving

@@ -34,22 +34,15 @@ var __importStar = (this && this.__importStar) || (function () {
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose_1 = __importStar(require("mongoose"));
-const AttemptSchema = new mongoose_1.Schema({
-    userId: { type: mongoose_1.Schema.Types.ObjectId, ref: 'User', required: true },
-    quizId: { type: mongoose_1.Schema.Types.ObjectId, ref: 'Quiz', required: true },
-    answers: [
-        {
-            questionId: { type: mongoose_1.Schema.Types.ObjectId, ref: 'Question', required: true },
-            selectedOptions: [{ type: String }],
-            textAnswer: { type: String },
-            isCorrect: { type: Boolean, required: true },
-            pointsEarned: { type: Number, required: true },
-        },
-    ],
-    totalScore: { type: Number, required: true },
-    xpEarned: { type: Number, required: true },
-    startedAt: { type: Date, required: true },
-    completedAt: { type: Date },
-    durationSeconds: { type: Number },
+const attemptSchema = new mongoose_1.Schema({
+    user: { type: mongoose_1.Schema.Types.ObjectId, ref: 'User', required: true },
+    quiz: { type: mongoose_1.Schema.Types.ObjectId, ref: 'Quiz', required: true },
+    score: { type: Number, required: true },
+    totalPoints: { type: Number, required: true },
+    answers: [{
+            question: { type: mongoose_1.Schema.Types.ObjectId, ref: 'Question', required: true },
+            selectedOptionIndex: { type: Number, required: true },
+        }],
+    completedAt: { type: Date, default: Date.now },
 }, { timestamps: true });
-exports.default = mongoose_1.default.model('Attempt', AttemptSchema);
+exports.default = mongoose_1.default.model('Attempt', attemptSchema);

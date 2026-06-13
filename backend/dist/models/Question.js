@@ -34,24 +34,12 @@ var __importStar = (this && this.__importStar) || (function () {
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose_1 = __importStar(require("mongoose"));
-const QuestionSchema = new mongoose_1.Schema({
-    subjectId: { type: mongoose_1.Schema.Types.ObjectId, ref: 'Subject', required: true },
-    topic: { type: String, required: true },
-    unit: { type: Number },
-    difficulty: { type: String, enum: ['easy', 'medium', 'hard'], required: true },
-    type: {
-        type: String,
-        enum: ['mcq', 'multiple_select', 'true_false', 'fill_in_the_blank', 'short_answer', 'numerical', 'coding'],
-        required: true,
-    },
-    content: { type: String, required: true },
-    options: [
-        {
-            text: { type: String },
-            isCorrect: { type: Boolean },
-        },
-    ],
-    correctAnswer: { type: String },
+const questionSchema = new mongoose_1.Schema({
+    quiz: { type: mongoose_1.Schema.Types.ObjectId, ref: 'Quiz', required: true },
+    text: { type: String, required: true },
+    options: [{ type: String, required: true }],
+    correctOptionIndex: { type: Number, required: true },
     explanation: { type: String },
+    points: { type: Number, default: 1 },
 }, { timestamps: true });
-exports.default = mongoose_1.default.model('Question', QuestionSchema);
+exports.default = mongoose_1.default.model('Question', questionSchema);

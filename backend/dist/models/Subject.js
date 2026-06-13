@@ -34,11 +34,11 @@ var __importStar = (this && this.__importStar) || (function () {
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose_1 = __importStar(require("mongoose"));
-const SubjectSchema = new mongoose_1.Schema({
+const subjectSchema = new mongoose_1.Schema({
     name: { type: String, required: true },
     code: { type: String, required: true, unique: true },
-    branch: [{ type: String, required: true }],
-    semester: [{ type: Number, required: true }],
+    branch: { type: String, required: true },
+    semester: { type: Number, required: true },
     description: { type: String },
 }, { timestamps: true });
-exports.default = mongoose_1.default.model('Subject', SubjectSchema);
+exports.default = mongoose_1.default.model('Subject', subjectSchema);
