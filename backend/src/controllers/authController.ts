@@ -203,7 +203,7 @@ export const resetPassword = async (req: Request, res: Response): Promise<void> 
     // Get hashed token
     const resetPasswordToken = crypto
       .createHash('sha256')
-      .update(req.params.token)
+      .update(req.params.token as string)
       .digest('hex');
 
     const user = await User.findOne({
