@@ -78,7 +78,7 @@ const ResetPassword = () => {
       </div>
 
       {/* Right Panel */}
-      <div className="flex-1 flex flex-col justify-center py-12 px-4 sm:px-6 lg:px-20 xl:px-24 bg-white relative">
+      <div className="flex-1 flex flex-col justify-center py-12 px-4 sm:px-6 lg:px-20 xl:px-24 bg-dark-bg text-dark-text relative">
         <div className="mx-auto w-full max-w-sm lg:w-[400px]">
           <div className="text-center lg:text-left mb-10">
             <div className="lg:hidden flex items-center justify-center space-x-3 mb-8">
@@ -87,17 +87,17 @@ const ResetPassword = () => {
               </div>
               <span className="text-2xl font-bold text-text-primary tracking-tight">AntiGravity</span>
             </div>
-            <h2 className="text-3xl font-bold tracking-tight text-text-primary mb-2">
+            <h2 className="text-3xl font-bold tracking-tight text-white mb-2">
               Set New Password
             </h2>
-            <p className="text-text-secondary text-sm">
+            <p className="text-dark-muted text-sm">
               Please enter your new password below.
             </p>
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-5">
             <div className="space-y-1">
-              <label htmlFor="password" className="block text-sm font-medium text-text-primary">
+              <label htmlFor="password" className="block text-sm font-medium text-white">
                 New Password
               </label>
               <div className="relative group">
@@ -110,14 +110,14 @@ const ResetPassword = () => {
                   required
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="block w-full pl-10 pr-3 py-2.5 border border-gray-200 rounded-xl text-text-primary placeholder-text-muted focus:outline-none focus:ring-2 focus:ring-brand-primary/20 focus:border-brand-primary transition-all sm:text-sm bg-gray-50/50"
+                  className="input-premium w-full pl-10 pr-3 py-3 rounded-xl text-white placeholder-dark-muted focus:outline-none focus:ring-2 focus:ring-brand-primary/20 focus:border-brand-primary transition-all sm:text-sm bg-[#0e1628]"
                   placeholder="••••••••"
                 />
               </div>
             </div>
 
             <div className="space-y-1">
-              <label htmlFor="confirmPassword" className="block text-sm font-medium text-text-primary">
+              <label htmlFor="confirmPassword" className="block text-sm font-medium text-white">
                 Confirm Password
               </label>
               <div className="relative group">
@@ -130,7 +130,7 @@ const ResetPassword = () => {
                   required
                   value={confirmPassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}
-                  className="block w-full pl-10 pr-3 py-2.5 border border-gray-200 rounded-xl text-text-primary placeholder-text-muted focus:outline-none focus:ring-2 focus:ring-brand-primary/20 focus:border-brand-primary transition-all sm:text-sm bg-gray-50/50"
+                  className="input-premium w-full pl-10 pr-3 py-3 rounded-xl text-white placeholder-dark-muted focus:outline-none focus:ring-2 focus:ring-brand-primary/20 focus:border-brand-primary transition-all sm:text-sm bg-[#0e1628]"
                   placeholder="••••••••"
                 />
               </div>

@@ -73,7 +73,7 @@ const ForgotPassword = () => {
       </div>
 
       {/* Right Panel */}
-      <div className="flex-1 flex flex-col justify-center py-12 px-4 sm:px-6 lg:px-20 xl:px-24 bg-white relative">
+      <div className="flex-1 flex flex-col justify-center py-12 px-4 sm:px-6 lg:px-20 xl:px-24 bg-dark-bg text-dark-text relative">
         <div className="mx-auto w-full max-w-sm lg:w-[400px]">
           <div className="text-center lg:text-left mb-10">
             <div className="lg:hidden flex items-center justify-center space-x-3 mb-8">
@@ -82,17 +82,17 @@ const ForgotPassword = () => {
               </div>
               <span className="text-2xl font-bold text-text-primary tracking-tight">AntiGravity</span>
             </div>
-            <h2 className="text-3xl font-bold tracking-tight text-text-primary mb-2">
+            <h2 className="text-3xl font-bold tracking-tight text-white mb-2">
               Reset Password
             </h2>
-            <p className="text-text-secondary text-sm">
+            <p className="text-dark-muted text-sm">
               Enter your email to receive a reset link.
             </p>
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-5">
             <div className="space-y-1">
-              <label htmlFor="email" className="block text-sm font-medium text-text-primary">
+              <label htmlFor="email" className="block text-sm font-medium text-white">
                 Email address
               </label>
               <div className="relative group">
@@ -105,7 +105,7 @@ const ForgotPassword = () => {
                   required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="block w-full pl-10 pr-3 py-2.5 border border-gray-200 rounded-xl text-text-primary placeholder-text-muted focus:outline-none focus:ring-2 focus:ring-brand-primary/20 focus:border-brand-primary transition-all sm:text-sm bg-gray-50/50"
+                  className="input-premium w-full pl-10 pr-3 py-3 rounded-xl text-white placeholder-dark-muted focus:outline-none focus:ring-2 focus:ring-brand-primary/20 focus:border-brand-primary transition-all sm:text-sm bg-[#0e1628]"
                   placeholder="you@example.com"
                 />
               </div>
