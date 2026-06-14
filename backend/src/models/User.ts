@@ -13,6 +13,8 @@ export interface IUser extends Document {
   quizzesTaken: number;
   accuracy: number;
   badges: string[];
+  resetPasswordToken?: string;
+  resetPasswordExpire?: Date;
   comparePassword(candidatePassword: string): Promise<boolean>;
 }
 
@@ -29,6 +31,8 @@ const UserSchema: Schema = new Schema(
     quizzesTaken: { type: Number, default: 0 },
     accuracy: { type: Number, default: 0 },
     badges: [{ type: String }],
+    resetPasswordToken: { type: String },
+    resetPasswordExpire: { type: Date },
   },
   { timestamps: true }
 );
